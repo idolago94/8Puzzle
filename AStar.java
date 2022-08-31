@@ -3,7 +3,7 @@ import java.util.PriorityQueue;
 
 public class AStar {
 
-	private static Board goal = new Board("123456780"); // TODO: move zero to start
+	private static Board goal = new Board("123456780");
 
 	public static PartialSolution search(Board board, char type, String heuristics) {
 
@@ -11,24 +11,37 @@ public class AStar {
 		PriorityQueue<PartialSolution> frontier = new PriorityQueue<PartialSolution>();
 		// INITIALIZATION CODE...
 
+		PartialSolution boardNextStates = null;
 		while (!board.arriveToGoal(goal)) {
 			// A* IMPLEMENTATION
-			PartialSolution boardNextStates = board.getNextStates();
+			boardNextStates = board.getNextStates();
 			for (Board solution : boardNextStates.getSolutions()) {
 				solution.setMisplacedTiles(h_Misplaced(solution));
 			}
 			frontier.add(boardNextStates);
 
-			// TODO: override this.board with the best solution
+			board = boardNextStates.getBestSolution();
+			board.print();
 		}
 
-		return frontier.poll();
+		return boardNextStates;
 	}
 
 	// Manhattan distance
 	public static int h_Manhattan(Board b) {
-		// IMPLEMENT
-		return 0;
+		int[][] board = b.getInstance();
+		int distanceSum = 0;
+		for (int i = 0; i < b.size(); i++) {
+			for (int j = 0; j < b.size(); j++) {
+				int item = board[i][j];
+				if (item != 0) {
+					int goalI = (item - 1) / 3;
+					int goalJ = (item - 1) % 3;
+					distanceSum += Math.abs(i - goalI) + Math.abs(j - goalJ);
+				}
+			}
+		}
+		return distanceSum;
 	}
 
 	// misplaced tiles

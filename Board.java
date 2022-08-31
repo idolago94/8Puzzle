@@ -111,4 +111,8 @@ public class Board {
 	public void setMisplacedTiles(int n) {
 		this.misplaced_tiles = n;
 	}
+
+	public int getMisplacedTiles() {
+		return this.misplaced_tiles;
+	}
 }

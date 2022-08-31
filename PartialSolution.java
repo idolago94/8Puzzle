@@ -25,6 +25,15 @@ public class PartialSolution implements Comparable<PartialSolution> {
 		}
 	}
 
+	public Board getBestSolution() {
+		Board bestSolution = this.partialSolution.get(0);
+		for (Board solution : this.partialSolution) {
+			if (solution.getMisplacedTiles() < bestSolution.getMisplacedTiles())
+				bestSolution = solution;
+		}
+		return bestSolution;
+	}
+
 	@Override
 	public int compareTo(PartialSolution proc) {
 		// implement this
