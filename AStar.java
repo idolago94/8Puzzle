@@ -16,7 +16,7 @@ public class AStar {
 			// A* IMPLEMENTATION
 			boardNextStates = board.getNextStates();
 			for (Board solution : boardNextStates.getSolutions()) {
-				solution.setMisplacedTiles(h_Misplaced(solution));
+				solution.setMisplacedTiles(type == '0' ? h_Misplaced(solution) : h_Manhattan(solution));
 			}
 			frontier.add(boardNextStates);
 

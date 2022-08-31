@@ -8,7 +8,7 @@ public class Main {
 		System.out.println("puzzle:");
 		board.print();
 
-		char type = '0';// args[1].charAt(0);
+		char type = '1';// args[1].charAt(0); // 1=Manhattan 0=Misplaced
 		String heuristics = "1";// args[2];
 
 		PartialSolution ps = AStar.search(board, type, heuristics);
